@@ -3832,8 +3832,8 @@ DRWAV_PRIVATE drwav_bool32 drwav_init__internal(drwav* pWav, drwav_chunk_proc on
         translatedFormatTag = drwav_bytes_to_u16_ex(fmt.subFormat + 0, pWav->container);
     }
 
-    /* Some files have unreliable fact counts. Only use RIFF fact counts for Microsoft ADPCM, after the format is known. */
-    if ((pWav->container == drwav_container_riff || pWav->container == drwav_container_rifx) && translatedFormatTag != DR_WAVE_FORMAT_ADPCM) {
+    /* Some files have unreliable fact and ds64 sample counts. Only use them for Microsoft ADPCM, after the format is known. */
+    if (translatedFormatTag != DR_WAVE_FORMAT_ADPCM) {
         sampleCountFromFactChunk = 0;
     }
 
